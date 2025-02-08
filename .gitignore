@@ -1,0 +1,35 @@
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore build directories
+dist/
+build/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore environment files
+.env
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Ignore IDE-specific files
+.vscode/
+
+
+# Ignore compiled files
+*.class
+*.o
+*.so
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
