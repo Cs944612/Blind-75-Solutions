@@ -34,55 +34,52 @@ class Solution:
         if not s or not t:
             return ""
         
-        # Step 1: Build the frequency dictionary for t.
-        freq_t = {}
+        # Build a frequency dictionary for characters in t.
+        target_freq = {}
         for char in t:
-            freq_t[char] = freq_t.get(char,0) + 1
+            target_freq[char] = target_freq.get(char, 0) + 1
 
-        required_chars = len(freq_t)        # unique chars to match  
+        required_unique_chars = len(target_freq)  # Number of unique characters required in window
 
-        # Step 2: Initialize the sliding window pointers and other variables.
-        left, right = 0, 0
-        formed = 0              # to count how many characters meet the desired freqency
-        window_counts = {}
-        # (window length, left, right)
-        best_window = (float("inf"), None, None)
+        # Initialize window pointers and tracking variables.
+        left = 0
+        right = 0
+        num_chars_matched = 0                # How many characters currently meet the target frequency
+        current_window_counts = {}
+        # (window_length, window_left, window_right)
+        min_window = (float("inf"), None, None)
         
-        # Step 3: Start sliding the window.
+        # Expand the right pointer to explore the string.
         while right < len(s):
-            char = s[right]
-            window_counts[char] = window_counts.get(char, 0) + 1
+            curr_char = s[right]
+            current_window_counts[curr_char] = current_window_counts.get(curr_char, 0) + 1
 
-            # check if the current character meets the desired frequency 
-            if char in freq_t and window_counts[char] == freq_t[char]:
-                formed += 1
+            # Check if current character fulfills the required frequency.
+            if curr_char in target_freq and current_window_counts[curr_char] == target_freq[curr_char]:
+                num_chars_matched += 1
 
-            # Step 4: Contract the window if it's valid.
-            while left <= right and formed == required_chars:
-                # Update the smallest window if a smaller window is found.
-                if right - left + 1 < best_window[0]:
-                    best_window = (right - left + 1, left, right)
-                # prepare to move left pointer: remove the char at left 
-                char = s[left]
-                window_counts[char] -= 1
-                if char in freq_t and window_counts[char] < freq_t[char]:
-                    formed -= 1
+            # Once we have a valid window, try to contract from the left.
+            while left <= right and num_chars_matched == required_unique_chars:
+                window_length = right - left + 1
+                if window_length < min_window[0]:
+                    min_window = (window_length, left, right)
+                
+                # Remove the leftmost character and move left pointer.
+                left_char = s[left]
+                current_window_counts[left_char] -= 1
+                if left_char in target_freq and current_window_counts[left_char] < target_freq[left_char]:
+                    num_chars_matched -= 1
                 left += 1
 
-            # Move the right pointer to expand the window.
             right += 1
 
-        # Step 5: Return the smallest valid window or an empty string if not found.
-        if best_window[0] == float("inf"):
+        # Return the smallest valid window found, or an empty string if no such window exists.
+        if min_window[0] == float("inf"):
             return ""
         else:
-            # return the substring of s that corresponds to the best window
-            return s[best_window[1]:best_window[2] + 1]
-
-# Time complexity: O(n + m), where n is the length of s and m is the length of t.
-# Space complexity: O(n + m), where n is the length of s and m is the length of t.
+            return s[min_window[1]:min_window[2] + 1]
 
 if __name__ == "__main__":
     s = "ADOBECODEBANC"
     t = "ABC"
-    print(Solution().minWindow(s, t))  
+    print(Solution().minWindow(s, t))
