@@ -45,6 +45,7 @@ class Solution:
 # Time Complexity: O(n * k) where n is the number of strings in the input list and k is the length of the longest string
 # Space Complexity: O(n * k) where n is the number of strings in the input list and k is the length of the longest string
 
-# Example usage
-strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-print(Solution().groupAnagrams(strs))
+if __name__ == "__main__":
+    # Example usage
+    strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    print(Solution().groupAnagrams(strs))

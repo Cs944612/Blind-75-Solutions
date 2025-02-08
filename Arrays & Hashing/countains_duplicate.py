@@ -37,6 +37,7 @@ class Soltuion:
 # Time complexity: O(n)
 # Space complexity: O(n)
 
-# Example usage:
-nums = [1, 2, 3, 3]
-print(Soltuion().hasDuplicate(nums)) 
+if __name__ == "__main__":
+    # Example usage
+    nums = [1, 2, 3, 3]
+    print(Soltuion().hasDuplicate(nums))

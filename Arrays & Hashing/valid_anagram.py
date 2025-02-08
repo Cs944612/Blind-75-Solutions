@@ -45,7 +45,8 @@ class Solution:
 # Time complexity: O(n) 
 # Space complexity: O(n) 
 
-# Example usage:
-s = "racecar"
-t = "carrace"
-print(Solution().isAnagram(s, t)) 
+if __name__ == "__main__":
+    # Example usage:
+    s = "racecar"
+    t = "carrace"
+    print(Solution().isAnagram(s, t)) 

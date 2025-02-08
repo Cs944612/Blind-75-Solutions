@@ -55,7 +55,8 @@ class Solution:
 # Time complexity: O(n)
 # Space complexity: O(n)
 
-# Example usage:
-nums = [2, 7, 11, 15]
-target = 9
-print(Solution.twoSum(nums, target)) 
+if __name__ == "__main__":
+    # Example usage:
+    nums = [2, 7, 11, 15]
+    target = 9
+    print(Solution.twoSum(nums, target)) 
